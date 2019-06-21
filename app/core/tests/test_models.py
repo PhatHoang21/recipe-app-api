@@ -26,3 +26,11 @@ class ModelTest(TestCase):
     def test_create_user_invalid_email(self):
         with self.assertRaises(ValueError):
             get_user_model().objects.create_user(None, '1234')
+
+    def test_create_super_user(self):
+        user = get_user_model().objects.create_superuser(
+            'admin@gmail.com', '123123'
+        )
+
+        self.assertTrue(user.is_superuser)
+        self.assertTrue(user.is_staff)
